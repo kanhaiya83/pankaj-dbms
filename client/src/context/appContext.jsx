@@ -48,7 +48,7 @@ const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer,initialState);
   // axios --base url
   const instance = axios.create({
-     baseURL: import.meta.env.VITE_SERVER_URL,
+     baseURL: import.meta.env.VITE_SERVER_URL+"/api/v1",
      headers:{"token":localStorage.getItem("token")}
       // to get cookies in browser during development
     // production
