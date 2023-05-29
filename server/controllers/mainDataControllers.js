@@ -7,20 +7,24 @@ const upload = catchAsyncError(async (req, res, next) => {
     const file = req.file;
     const workbook = XLSX.readFile(file.path);
     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+
+    console.log("Converting to json!");
     const jsonData = XLSX.utils.sheet_to_json(worksheet);
+    console.log("Success!");
 
     // Insert the data in batches
-    const batchSize = 1000;
+    const batchSize = 500;
     let batchData = [];
     let insertedCount = 0;
-    // let temp = 0;
+    let temp = 0;
     if (jsonData) {
       for (const row of jsonData) {
-        // temp += 1;
+        temp += 1;
         // if (temp > 105) {
         //   break;
         // }
-        // console.log(row);
+        console.log(temp);
+
         const documentData = {
           dri_id: row["DRI-ID"],
           place: row["Place"],
@@ -41,6 +45,8 @@ const upload = catchAsyncError(async (req, res, next) => {
         batchData.push(documentData);
 
         if (batchData.length === batchSize) {
+    console.log("Inserting batch!");
+
           await MainData.insertMany(batchData);
           insertedCount += batchData.length;
           batchData = [];
