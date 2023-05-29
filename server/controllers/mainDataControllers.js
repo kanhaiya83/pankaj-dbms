@@ -25,7 +25,7 @@ const upload = catchAsyncError(async (req, res,) => {
         //   break;
         // }
         console.log(temp);
-
+        const date = row["Year Of Purchase"]+"-"+row["PP D"]+"-"+row["A"]
         const documentData = {
           dri_id: row["DRI-ID"],
           place: row["Place"],
@@ -40,7 +40,7 @@ const upload = catchAsyncError(async (req, res,) => {
           status: row["Status"],
           currentValue: row["Current Value "],
           remarks: row["Remarks"],
-          date: `${row["Year Of Purchase"]}-${row["PP D"]}-${row["A"]}`.replaceAll("/","")
+          date: date.replaceAll("/","")
         };
 
         batchData.push(documentData);
