@@ -13,14 +13,14 @@ const upload = catchAsyncError(async (req, res, next) => {
     const batchSize = 1000;
     let batchData = [];
     let insertedCount = 0;
-    let temp = 0;
+    // let temp = 0;
     if (jsonData) {
       for (const row of jsonData) {
-        temp += 1;
-        if (temp > 105) {
-          break;
-        }
-        console.log(row);
+        // temp += 1;
+        // if (temp > 105) {
+        //   break;
+        // }
+        // console.log(row);
         const documentData = {
           dri_id: row["DRI-ID"],
           place: row["Place"],
@@ -136,7 +136,7 @@ const getData = catchAsyncError(async (req, res, next) => {
     queryObject.customerName = { $regex: customerName, $options: "i" };
   }
 
-  let result = await MainData.find(queryObject).limit(105);
+  let result = await MainData.find(queryObject);
   // console.log(result);
   if (editStatus && editStatus !== "All") {
     const editDataRequest = await UpdateData.find();
