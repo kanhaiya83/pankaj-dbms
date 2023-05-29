@@ -116,7 +116,7 @@ const getDataList = catchAsyncError(async (req, res, next) => {
     }
   
     // Fetch the data from the database using skip and limit
-    const result = await MainData.find().skip(skip).limit(limit);
+    const result = await MainData.find(queryObject).skip(skip).limit(limit);
 
     // Get the total count of documents
     const totalCount = await MainData.countDocuments();
