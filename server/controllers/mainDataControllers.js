@@ -2,13 +2,14 @@ import catchAsyncError from "../middleware/catchAsyncError.js";
 import MainData from "../models/MainData.js";
 import XLSX from "xlsx";
 import UpdateData from "../models/UpdateData.js";
-const upload = catchAsyncError(async (req, res, next) => {
+const upload = catchAsyncError(async (req, res,) => {
   try {
     const file = req.file;
+    console.log("Converting to json!".req.file);
+
     const workbook = XLSX.readFile(file.path);
     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
 
-    console.log("Converting to json!");
     const jsonData = XLSX.utils.sheet_to_json(worksheet);
     console.log("Success!");
 
