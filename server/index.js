@@ -45,7 +45,7 @@ app.use("/api/v1/auth", userRouter);
 app.use("/api/v1", mainDataRouter);
 app.use("/api/v1/edit", UpdateDataRouter);
 
-app.use(express.static(path.resolve(__dirname, "../server/dist")));
+// app.use(express.static(path.resolve(__dirname, "../server/dist")));
 
 // app.get("*", (req, res) => {
 //   res.status(404).send("<h1> Not Found</h2>");
