@@ -88,14 +88,35 @@ const upload = catchAsyncError(async (req, res,) => {
 
 const getDataList = catchAsyncError(async (req, res, next) => {
   try {
+    const { status, place, year, customerName, editStatus, dri_id, appNumber } =
+    req.query;
     const page = parseInt(req.query.page) || 1; // Get the requested page number
-    const limit = parseInt(req.query.limit) || 10; // Get the requested limit per page
+    const limit = parseInt(req.query.limit) || 25; // Get the requested limit per page
 
     // Calculate the skip value based on the page number and limit
     const skip = (page - 1) * limit;
-
+    const queryObject = {};
+    if (appNumber) {
+      queryObject.appNumber = appNumber;
+    }
+    if (dri_id) {
+      queryObject.dri_id = dri_id;
+    }
+    if (status && status !== "All") {
+      queryObject.status = status;
+    }
+    if (place && place !== "All") {
+      queryObject.place = place;
+    }
+    if (year) {
+      queryObject.date = { $regex: year+"-", $options: "i" };;
+    }
+    if (customerName) {
+      queryObject.customerName = { $regex: customerName, $options: "i" };
+    }
+  
     // Fetch the data from the database using skip and limit
-    const data = await MainData.find().skip(skip).limit(limit);
+    const result = await MainData.find().skip(skip).limit(limit);
 
     // Get the total count of documents
     const totalCount = await MainData.countDocuments();
@@ -104,12 +125,23 @@ const getDataList = catchAsyncError(async (req, res, next) => {
       pageLimit: limit,
       totalCount,
     };
-
+    if (editStatus && editStatus !== "All") {
+      const editDataRequest = await UpdateData.find();
+      result = data.filter((data) =>
+        editDataRequest.some((editData) => {
+          return (
+            String(editData.dataId) === String(data._id) &&
+            editData.status === editStatus
+          );
+        })
+      );
+    }
+  
     res.status(200).json({
       success: true,
-      count: data.length,
+      count: result.length,
       pageInfo,
-      result: data,
+      result,
     });
   } catch (err) {
     res.status(500).json({

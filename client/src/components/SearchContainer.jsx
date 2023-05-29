@@ -5,18 +5,9 @@ import { useAppContext } from '../context/appContext';
 const statusOptions=['Regular','Outstanding']
 const placeOptions=["GOA","All"]
 
-const SearchContainer = () => {
+const SearchContainer = ({form,setForm}) => {
 
-  const [form,setForm]=useState({
-    status:"All",
-    place:"All",
-    dri_id:"",
-    year:"",
-    customerName:"",
-    editStatus:"All",
-    appNumber:"",
-    
-  });
+  
   
   const {getAllData}=useAppContext();
 

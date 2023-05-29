@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 // import  Pagination  from '../../pages/dashboard/pagination'
 import { Loader, SearchContainer } from "../../components";
 import { useAppContext } from "../../context/appContext";
-import ReactPaginate from "react-paginate";
 import dayjs from "dayjs"
 import localizedFormat from "dayjs/plugin/localizedFormat"
+import PaginationContainer from "../../components/PaginationContainer";
 dayjs.extend(localizedFormat)
 function Items({ currentItems }) {
   return (
@@ -105,62 +105,36 @@ function Items({ currentItems }) {
 }
 
 const Data = () => {
-  const { getAllData, mainData, isLoading } = useAppContext();
-
+  const { getAllData, mainData, isLoading,setPage,pageInfo,page } = useAppContext();
+  const [form,setForm]=useState({
+    status:"All",
+    place:"All",
+    dri_id:"",
+    year:"",
+    customerName:"",
+    editStatus:"All",
+    appNumber:"",
+    
+  });
   useEffect(() => {
-    getAllData({
-      status: "All",
-      place: "All",
-      yearOfPurchase: "",
-      customerName: "",
-      editStatus: "All",
-    });
+    getAllData(form);
   }, []);
-
-  const [itemOffset, setItemOffset] = useState(0);
-
-  const endOffset = itemOffset + 25;
-  const currentItems = mainData.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(mainData.length / 25);
-  // Invoke when user click to request another page.
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * 25) % mainData.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
-  };
 
   return (
     <>
       <div className="bg-[#f0f4f8] h-full  py-10 px-[3rem] border-t border-l border-gray-300">
-        <SearchContainer />
+        <SearchContainer form={form} setForm={setForm}/>
         {/* <Pagination/> */}
         {/* <p className='mt-10'> {!mainData?.length>0?"Data not found":`${mainData?.length} results found`} </p> */}
-
+      <PaginationContainer form={form}/>
         {isLoading ? (
           <div className="w-full flex justify-center items-center">
             <Loader></Loader>
           </div>
         ) : (
           <>
-          <ReactPaginate
-              breakLabel="..."
-              nextLabel="next >"
-              onPageChange={handlePageClick}
-              pageRangeDisplayed={5}
-              pageCount={pageCount}
-              previousLabel="< previous"
-              renderOnZeroPageCount={null}
-              containerClassName={
-                "pagination"
-              } /* as this work same as bootstrap class */
-              subContainerClassName={
-                "pages pagination"
-              } /* as this work same as bootstrap class */
-              activeClassName={"active"}
-            />
-            <Items currentItems={currentItems} />
+         
+            <Items currentItems={ mainData} />
           </>
         )}
         {/* <Pagination {...pageInfo} /> */}

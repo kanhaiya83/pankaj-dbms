@@ -25,7 +25,7 @@ import {
    
     
 } from './action'
-import React, { useReducer, useContext,useEffect } from 'react';
+import React, { useReducer, useContext,useEffect, useState } from 'react';
 
 
 
@@ -40,12 +40,16 @@ export const initialState  ={
     editRequestData:[],
     editDataStatusChange:false,
     toggleAction:false,
+    pageInfo:{
+      totalCount:25
+    }
 }
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   
   const [state, dispatch] = useReducer(reducer,initialState);
+  const [page,setPage]= useState(1)
   // axios --base url
   const instance = axios.create({
      baseURL: import.meta.env.VITE_SERVER_URL+"/api/v1",
@@ -140,11 +144,11 @@ const AppProvider = ({ children }) => {
       dispatch({type:API_CALL_BEGIN});     
       try {
   
-        const {data}= await instance(`/getData?dri_id=${dri_id}&appNumber=${appNumber}&year=${year}&status=${status}&place=${place}&customerName=${customerName}&editStatus=${editStatus}`) 
+        const {data}= await instance(`/getDataList?dri_id=${dri_id}&appNumber=${appNumber}&year=${year}&status=${status}&place=${place}&customerName=${customerName}&editStatus=${editStatus}&page=${page}`) 
         console.log(data);
         
         dispatch({type:GET_ALL_DATA_SUCCESS,
-          payload:data.result
+          payload:data
         })
       } catch (error) {
         dispatch({type:API_CALL_FAIL});
@@ -251,7 +255,7 @@ const AppProvider = ({ children }) => {
         dri_id:"",
         customerName:"",
         editStatus:"All",
-        appNumber:"",
+        appNumber:""
       });
       getAllEditRequest();
     },[])
@@ -259,7 +263,8 @@ const AppProvider = ({ children }) => {
         <AppContext.Provider
           value={{...state,
             setFile,UploadData,getAllData,editData,getAllEditRequest,approveEditRequest,rejectEditRequest
-            ,signupUser,loginUser,logoutUser,getCurrUser}}
+            ,signupUser,loginUser,logoutUser,getCurrUser,page
+            ,setPage}}
         >
           {children}
         </AppContext.Provider>

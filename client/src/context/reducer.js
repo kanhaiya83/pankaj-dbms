@@ -97,7 +97,8 @@ const reducer =(state,action)=>{
         return {
             ...state,
             isLoading:false,
-           mainData:action.payload,
+           mainData:action.payload.result,
+           pageInfo:action.payload.pageInfo,
             
         }
     }

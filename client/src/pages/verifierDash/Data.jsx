@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "../../components";
 import { useAppContext } from "../../context/appContext";
+import PaginationContainer from "../../components/PaginationContainer";
 
 const Data = () => {
   const {
@@ -12,6 +13,7 @@ const Data = () => {
     editDataStatusChange,
     approveEditRequest,
     rejectEditRequest,
+    pageInfo
   } = useAppContext();
 
   useEffect(() => {
@@ -25,7 +27,6 @@ const Data = () => {
     getAllEditRequest();
   }, [editDataStatusChange]);
 
-  useEffect(() => {}, [editDataStatusChange]);
 
   const DataToShow = mainData.filter((data) =>
     editRequestData.some((editData) => {

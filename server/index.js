@@ -34,9 +34,7 @@ dotenv.config();
 // middleware
 app.use(express.json());
 app.use(
-  cors({
-    origin: "*",
-  })
+  cors()
 );
 app.use(cookieParser());
 

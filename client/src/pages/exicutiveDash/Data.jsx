@@ -2,6 +2,7 @@ import React,{useEffect, useState} from 'react'
 import { Loader,EditForm } from '../../components'
 import { useAppContext } from '../../context/appContext';
 import { ExeSearchContainer } from '../../components';
+import PaginationContainer from '../../components/PaginationContainer';
 
 const Data = () => {
   const {getAllEditRequest,toggleAction,mainData,isLoading,editRequestData,getAllData}=useAppContext();
@@ -65,31 +66,57 @@ const Data = () => {
     <>
     {show && <EditForm setShow={setShow} dataId={dataId} />}
     <div className='bg-[#f0f4f8] h-screen  py-10 px-[3rem] border-t border-l border-gray-300'>
+      <ExeSearchContainer/>
+    <PaginationContainer/>
       
      {isLoading?(<div className='w-full flex justify-center items-center'>
       <Loader></Loader>
      </div>):(
       <> 
-      <ExeSearchContainer/>
       <div className="mt-10 relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-center">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                  <th scope="col" className="px-6 py-3">
-                  Customer Name
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                  App number
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Place
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                  Date
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                      Status
-                  </th>
+              <th scope="col" className="px-6 py-3">
+                      DRI-ID
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      PLACE
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      APP NO
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      COMPANY
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      MEMBERSHIP TYPE
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      DATE OF PURCHASE
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      AMC
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      CUSTOMER NAME
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      GSV
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      CSV
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      DEPOSIT
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      STATUS
+                    </th>
+                  
+                    <th scope="col" className="px-6 py-3">
+                      REMARKS
+                    </th>
                   <th scope="col" className="px-6 py-3">
                     Action
                 </th>
@@ -104,27 +131,207 @@ const Data = () => {
   
                 return (
                   <tr key={obj._id} className="bg-white border-b dark:bg-gray-100 ">
-                  <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                     <p className={`${obj.customerName.length>1 && "line-through"}`}>  { obj.customerName[0]}</p>
-                     { obj.customerName[1] && <p className='text-blue-600'>{obj.customerName[1]}</p>}
-                  </td>
-                  <td className="px-6 py-4">
-                      <p className={`${obj.appNumber.length>1 && "line-through"}`}>{ obj.appNumber[0]}</p>
-                        { obj.appNumber[1] && <p className='text-blue-600'>{obj.appNumber[1]}</p>}
-                  </td>
-                  <td className="px-6 py-4">
-                      <p className={`${obj.place.length>1 && "line-through"}`}>{ obj.place[0]}</p>
-                        { obj.place[1] && <p className='text-blue-600'>{obj.place[1]}</p>}
-                  </td>
-                  <td className="px-6 py-4 text-center">
-                      <p className={`${obj.date.length>1 && "line-through"}`}>{ obj.date[0]}</p>
-                            { obj.date[1] && <p className='text-blue-600'>{obj.date[1]}</p>}
-                  </td>
-                  <td className="px-6 py-4">
-                     
-                      <p className={`${obj.status.length>1 && "line-through"}`}>{ obj.status[0]}</p>
-                            { obj.status[1] && <p className='text-blue-600'>{obj.status[1]}</p>}
-                  </td>
+                 <td
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
+                        >
+                          <p
+                            className={`${obj.dri_id.length > 1 && "text-red-500 line-through"}`}
+                          >
+                            {" "}
+                            {obj.dri_id[0]}
+                          </p>
+                          {obj.dri_id[1] && (
+                            <p className="text-blue-600">{obj.dri_id[1]}</p>
+                          )}
+                        </td>{" "} <td
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
+                        >
+                          <p
+                            className={`${obj.place.length > 1 && "text-red-500 line-through"}`}
+                          >
+                            {" "}
+                            {obj.place[0]}
+                          </p>
+                          {obj.place[1] && (
+                            <p className="text-blue-600">{obj.place[1]}</p>
+                          )}
+                        </td>{" "}
+                        <td
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
+                        >
+                          <p
+                            className={`${
+                              obj.appNumber.length > 1 && "text-red-500 line-through"
+                            }`}
+                          >
+                            {" "}
+                            {obj.appNumber[0]}
+                          </p>
+                          {obj.appNumber[1] && (
+                            <p className="text-blue-600">
+                              {obj.appNumber[1]}
+                            </p>
+                          )}
+                        </td>{" "}
+                        <td
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
+                        >
+                          <p
+                            className={`${
+                              obj.company.length > 1 && "text-red-500 line-through"
+                            }`}
+                          >
+                            {" "}
+                            {obj.company[0] || "-"}
+                          </p>
+                          {obj.company[1] && (
+                            <p className="text-blue-600">
+                              {obj.company[1]}
+                            </p>
+                          )}
+                        </td>{" "}
+                        <td
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
+                        >
+                          <p
+                            className={`${
+                              obj.membership_type.length > 1 && "text-red-500 line-through"
+                            }`}
+                          >
+                            {" "}
+                            {obj.membership_type[0]}
+                          </p>
+                          {obj.membership_type[1] && (
+                            <p className="text-blue-600">
+                              {obj.membership_type[1]}
+                            </p>
+                          )}
+                        </td>{" "}
+                        <td
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
+                        >
+                          <p
+                            className={`${
+                              obj.date.length > 1 && "text-red-500 line-through"
+                            }`}
+                          >
+                            {" "}
+                            {obj.date[0]}
+                          </p>
+                          {obj.date[1] && (
+                            <p className="text-blue-600">
+                              {obj.date[1]}
+                            </p>
+                          )}
+                        </td>{" "}
+                        <td
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
+                        >
+                          <p
+                            className={`${
+                              obj.amc.length > 1 && "text-red-500 line-through"
+                            }`}
+                          >
+                            {" "}
+                            {obj.amc[0]}
+                          </p>
+                          {obj.amc[1] && (
+                            <p className="text-blue-600">
+                              {obj.amc[1]}
+                            </p>
+                          )}
+                        </td>{" "}
+                        <td
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
+                        >
+                          <p
+                            className={`${
+                              obj.customerName.length > 1 && "text-red-500 line-through"
+                            }`}
+                          >
+                            {" "}
+                            {obj.customerName[0]}
+                          </p>
+                          {obj.customerName[1] && (
+                            <p className="text-blue-600">
+                              {obj.customerName[1]}
+                            </p>
+                          )}
+                        </td>{" "}
+                        <td
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
+                        >
+                          <p
+                            className={`${
+                              obj.GSV.length > 1 && "text-red-500 line-through"
+                            }`}
+                          >
+                            {" "}
+                            {obj.GSV[0]}
+                          </p>
+                          {obj.GSV[1] && (
+                            <p className="text-blue-600">
+                              {obj.GSV[1]}
+                            </p>
+                          )}
+                        </td>
+                        <td className="px-6 py-4">
+                          <p
+                            className={`${
+                              obj.CSV.length > 1 && "line-through"
+                            }`}
+                          >
+                            {obj.CSV[0]}
+                          </p>
+                          {obj.CSV[1] && (
+                            <p className="text-blue-600">{obj.CSV[1]}</p>
+                          )}
+                        </td>
+                        <td className="px-6 py-4">
+                          <p
+                            className={`${
+                              obj.deposit.length > 1 && "line-through"
+                            }`}
+                          >
+                            {obj.deposit[0]}
+                          </p>
+                          {obj.deposit[1] && (
+                            <p className="text-blue-600">{obj.deposit[1]}</p>
+                          )}
+                        </td>
+                        <td className="px-6 py-4 text-center">
+                          <p
+                            className={`${
+                              obj.status.length > 1 && "line-through"
+                            }`}
+                          >
+                            {obj.status[0]}
+                          </p>
+                          {obj.status[1] && (
+                            <p className="text-blue-600">{obj.status[1]}</p>
+                          )}
+                        </td>
+                        <td className="px-6 py-4">
+                          <p
+                            className={`${
+                              obj.remarks.length > 1 && "line-through"
+                            }`}
+                          >
+                            {obj.remarks[0]}
+                          </p>
+                          {obj.remarks[1] && (
+                            <p className="text-blue-600">{obj.remarks[1]}</p>
+                          )}
+                        </td>
                   <td className="px-6 py-4 text-center">
                     <button onClick={()=>showForm(obj._id[0])} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
