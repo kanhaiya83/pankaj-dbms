@@ -5,11 +5,11 @@ import { useAppContext } from '../context/appContext';
 const statusOptions=['Regular','Outstanding']
 const placeOptions=["GOA","All"]
 
-const SearchContainer = ({form,setForm,page}) => {
+const SearchContainer = ({form,setForm}) => {
 
   
   
-  const {getAllData,setPage}=useAppContext();
+  const {getAllData,setPage,page}=useAppContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
