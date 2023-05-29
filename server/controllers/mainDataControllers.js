@@ -5,7 +5,7 @@ import UpdateData from "../models/UpdateData.js";
 const upload = catchAsyncError(async (req, res,) => {
   try {
     const file = req.file;
-    console.log("Converting to json!".req.file);
+    console.log("Converting to json!",req.file);
 
     const workbook = XLSX.readFile(file.path);
     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
