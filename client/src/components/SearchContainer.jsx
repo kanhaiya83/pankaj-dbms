@@ -9,12 +9,13 @@ const SearchContainer = ({form,setForm}) => {
 
   
   
-  const {getAllData}=useAppContext();
+  const {getAllData,setPage}=useAppContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form)
-    getAllData(form); 
+    // getAllData({...form,page:1}); 
+    setPage(1)
   };
   const handleInputChange = (event) => {
     const { name, value } = event.target;

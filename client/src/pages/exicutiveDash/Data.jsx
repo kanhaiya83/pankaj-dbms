@@ -1,11 +1,21 @@
 import React,{useEffect, useState} from 'react'
-import { Loader,EditForm } from '../../components'
+import { Loader,EditForm, SearchContainer } from '../../components'
 import { useAppContext } from '../../context/appContext';
 import { ExeSearchContainer } from '../../components';
 import PaginationContainer from '../../components/PaginationContainer';
 
 const Data = () => {
   const {getAllEditRequest,toggleAction,mainData,isLoading,editRequestData,getAllData}=useAppContext();
+  const [form,setForm]=useState({
+    status:"All",
+    place:"All",
+    dri_id:"",
+    year:"",
+    customerName:"",
+    editStatus:"All",
+    appNumber:"",
+    
+  });
   useEffect(()=>{
     getAllData({
       status:"All",
@@ -66,7 +76,9 @@ const Data = () => {
     <>
     {show && <EditForm setShow={setShow} dataId={dataId} />}
     <div className='bg-[#f0f4f8] h-screen  py-10 px-[3rem] border-t border-l border-gray-300'>
-      <ExeSearchContainer/>
+      {/* <ExeSearchContainer/> */}
+      <SearchContainer form={form} setForm={setForm}/>
+
     <PaginationContainer/>
       
      {isLoading?(<div className='w-full flex justify-center items-center'>

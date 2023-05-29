@@ -119,7 +119,7 @@ const getDataList = catchAsyncError(async (req, res, next) => {
     const result = await MainData.find(queryObject).skip(skip).limit(limit);
 
     // Get the total count of documents
-    const totalCount = await MainData.countDocuments();
+    const totalCount = await MainData.find(queryObject).countDocuments();
     let pageInfo = {
       page,
       pageLimit: limit,
