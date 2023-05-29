@@ -5,7 +5,7 @@ import { useAppContext } from '../context/appContext';
 const statusOptions=['Regular','Outstanding']
 const placeOptions=["GOA","All"]
 
-const SearchContainer = ({form,setForm}) => {
+const SearchContainer = ({form,setForm,page}) => {
 
   
   
@@ -14,7 +14,7 @@ const SearchContainer = ({form,setForm}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form)
-    // getAllData({...form,page:1}); 
+    if(page ===1)return getAllData({...form}); 
     setPage(1)
   };
   const handleInputChange = (event) => {
