@@ -104,6 +104,18 @@ const Data = () => {
                       CUSTOMER NAME
                     </th>
                     <th scope="col" className="px-6 py-3">
+                      ADDRESS
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      RES PHONE
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      OFFICE PHONE{" "}
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      PROFESSION
+                    </th>
+                    <th scope="col" className="px-6 py-3">
                       GSV
                     </th>
                     <th scope="col" className="px-6 py-3">
@@ -294,7 +306,83 @@ const Data = () => {
                               {obj.customerName[1]}
                             </p>
                           )}
-                        </td>{" "}
+                        </td>
+                        <td
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
+                        >
+                          <p
+                            className={`${
+                              obj.address.length > 1 &&
+                              "text-red-500 line-through"
+                            }`}
+                          >
+                            {" "}
+                            {obj.address[0]}
+                          </p>
+                          {obj.address[1] && (
+                            <p className="text-blue-600">
+                              {obj.address[1]}
+                            </p>
+                          )}
+                        </td>
+                        <td
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
+                        >
+                          <p
+                            className={`${
+                              obj.residentialPhone.length > 1 &&
+                              "text-red-500 line-through"
+                            }`}
+                          >
+                            {" "}
+                            {obj.residentialPhone[0]}
+                          </p>
+                          {obj.residentialPhone[1] && (
+                            <p className="text-blue-600">
+                              {obj.residentialPhone[1]}
+                            </p>
+                          )}
+                        </td>
+                        <td
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
+                        >
+                          <p
+                            className={`${
+                              obj.officePhone.length > 1 &&
+                              "text-red-500 line-through"
+                            }`}
+                          >
+                            {" "}
+                            {obj.officePhone[0]}
+                          </p>
+                          {obj.officePhone[1] && (
+                            <p className="text-blue-600">
+                              {obj.officePhone[1]}
+                            </p>
+                          )}
+                        </td>
+                        <td
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
+                        >
+                          <p
+                            className={`${
+                              obj.profession.length > 1 &&
+                              "text-red-500 line-through"
+                            }`}
+                          >
+                            {" "}
+                            {obj.profession[0]}
+                          </p>
+                          {obj.profession[1] && (
+                            <p className="text-blue-600">
+                              {obj.profession[1]}
+                            </p>
+                          )}
+                        </td>
                         <td
                           scope="row"
                           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
@@ -356,7 +444,7 @@ const Data = () => {
                           >
                             {obj.CSV[0] - obj.deposit[0]}
                           </p>
-                          {(obj.GSV.length || obj.deposit.length) && (
+                          {(obj.GSV.length>1 || obj.deposit.length>1) && (
                             <p className="text-blue-600">
                               {(obj.CSV[1] || obj.CSV[0]) -
                                 (obj.deposit[1] || obj.deposit[0])}

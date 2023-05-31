@@ -37,6 +37,17 @@ function Items({ currentItems }) {
               CUSTOMER NAME
             </th>
             <th scope="col" className="px-6 py-3">
+              ADDRESS
+            </th>
+            <th scope="col" className="px-6 py-3">
+              RES PHONE
+            </th>
+            <th scope="col" className="px-6 py-3">
+              OFFICE PHONE            </th>
+            <th scope="col" className="px-6 py-3">
+              PROFESSION
+            </th>
+            <th scope="col" className="px-6 py-3">
               GSV
             </th>
             <th scope="col" className="px-6 py-3">
@@ -84,6 +95,10 @@ function Items({ currentItems }) {
                 <td className="px-6 py-4">{dayjs(obj.date,"YYYY-MM-DD").format("LL")}</td>
                 <td className="px-6 py-4">{obj.amc}</td>
                 <td className="px-6 py-4">{obj.customerName}</td>
+                <td className="px-6 py-4">{obj.address}</td>
+                <td className="px-6 py-4">{obj.residentialPhone}</td>
+                <td className="px-6 py-4">{obj.officePhone}</td>
+                <td className="px-6 py-4">{obj.profession}</td>
                 <td className="px-6 py-4">{obj.GSV}</td>
                 <td className="px-6 py-4">{obj.CSV}</td>
                 <td className="px-6 py-4">{obj.deposit}</td>
