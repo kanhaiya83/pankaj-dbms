@@ -23,11 +23,11 @@ const AdminLinks=[
       text:"Data"
   
     },
-    {
-      to:"work",
-      text:"My Work"
+    // {
+    //   to:"work",
+    //   text:"My Work"
   
-    },
+    // },
      
   ]
 

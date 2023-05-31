@@ -11,7 +11,8 @@ const PaginationContainer = ({form={}}) => {
     setPage(event.selected+1);
   };
   return (
-    <ReactPaginate
+   <div className="w-full">
+     <ReactPaginate
     forcePage={page-1}
         breakLabel="..."
         nextLabel="next >"
@@ -28,6 +29,7 @@ const PaginationContainer = ({form={}}) => {
         } /* as this work same as bootstrap class */
         activeClassName={"active"}
       />
+   </div>
   )
 }
 

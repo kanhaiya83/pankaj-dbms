@@ -123,10 +123,10 @@ const Data = () => {
   return (
     <>
       <div className="bg-[#f0f4f8] h-full  py-10 px-[3rem] border-t border-l border-gray-300">
+        <div className="sticky top-0 z-10 w-full  bg-[#F0F4F8] shadow ">
         <SearchContainer form={form} setForm={setForm}/>
-        {/* <Pagination/> */}
-        {/* <p className='mt-10'> {!mainData?.length>0?"Data not found":`${mainData?.length} results found`} </p> */}
       <PaginationContainer form={form}/>
+        </div>
         {isLoading ? (
           <div className="w-full flex justify-center items-center">
             <Loader></Loader>

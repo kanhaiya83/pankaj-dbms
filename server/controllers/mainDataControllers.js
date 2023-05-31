@@ -88,11 +88,11 @@ const upload = catchAsyncError(async (req, res,) => {
 
 const getDataList = catchAsyncError(async (req, res, next) => {
   try {
-    const { status, place, year, customerName, editStatus, dri_id, appNumber } =
+    const { status, place, year, customerName, editStatus, dri_id, appNumber ,amc} =
     req.query;
     const page = parseInt(req.query.page) || 1; // Get the requested page number
     const limit = parseInt(req.query.limit) || 25; // Get the requested limit per page
-
+console.log(req.query);
     // Calculate the skip value based on the page number and limit
     const skip = (page - 1) * limit;
     const queryObject = {};
@@ -113,6 +113,9 @@ const getDataList = catchAsyncError(async (req, res, next) => {
     }
     if (customerName) {
       queryObject.customerName = { $regex: customerName, $options: "i" };
+    }
+    if (amc) {
+      queryObject.amc = amc
     }
   
     // Fetch the data from the database using skip and limit

@@ -13,7 +13,7 @@ const Data = () => {
     editDataStatusChange,
     approveEditRequest,
     rejectEditRequest,
-    pageInfo
+    pageInfo,
   } = useAppContext();
 
   useEffect(() => {
@@ -26,7 +26,6 @@ const Data = () => {
     });
     getAllEditRequest();
   }, [editDataStatusChange]);
-
 
   const DataToShow = mainData.filter((data) =>
     editRequestData.some((editData) => {
@@ -116,7 +115,15 @@ const Data = () => {
                     <th scope="col" className="px-6 py-3">
                       STATUS
                     </th>
-                  
+                    <th scope="col" className="px-6 py-3">
+                      OUTSTANDING
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      YEAR TILL NOW
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      AFTER DEDUCTING LICENSE FEE
+                    </th>
                     <th scope="col" className="px-6 py-3">
                       REMARKS
                     </th>
@@ -127,19 +134,38 @@ const Data = () => {
                 </thead>
                 <tbody>
                   {DataToShow.map((obj) => {
+                    const yearsCountTillNow =
+                      new Date().getFullYear() -
+                      parseInt(obj.date[0].split("-")[0]);
+                    const yearsCountTillNow2 =
+                      obj.date[1] &&
+                      new Date().getFullYear() -
+                        parseInt(obj.date[1].split("-")[0]);
+
+                    const afterFeesDeduction = Math.round(
+                      obj.deposit[0] - (obj.deposit[0] / 99) * yearsCountTillNow
+                    );
+                    const afterFeesDeduction2 =
+                      (obj.deposit[1] || obj.date[1]) &&
+                      Math.round(
+                        (obj.deposit[1] || obj.deposit[0]) -
+                          ((obj.deposit[1] || obj.deposit[0]) / 99) *
+                            (yearsCountTillNow2 || yearsCountTillNow)
+                      );
                     return (
                       <tr
                         key={obj._id[0]}
                         className="bg-white border-b dark:bg-gray-100 "
                       >
-                      
-                  
-                      <td
+                        <td
                           scope="row"
                           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
                         >
                           <p
-                            className={`${obj.dri_id.length > 1 && "text-red-500 line-through"}`}
+                            className={`${
+                              obj.dri_id.length > 1 &&
+                              "text-red-500 line-through"
+                            }`}
                           >
                             {" "}
                             {obj.dri_id[0]}
@@ -147,12 +173,16 @@ const Data = () => {
                           {obj.dri_id[1] && (
                             <p className="text-blue-600">{obj.dri_id[1]}</p>
                           )}
-                        </td>{" "} <td
+                        </td>{" "}
+                        <td
                           scope="row"
                           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
                         >
                           <p
-                            className={`${obj.place.length > 1 && "text-red-500 line-through"}`}
+                            className={`${
+                              obj.place.length > 1 &&
+                              "text-red-500 line-through"
+                            }`}
                           >
                             {" "}
                             {obj.place[0]}
@@ -167,16 +197,15 @@ const Data = () => {
                         >
                           <p
                             className={`${
-                              obj.appNumber.length > 1 && "text-red-500 line-through"
+                              obj.appNumber.length > 1 &&
+                              "text-red-500 line-through"
                             }`}
                           >
                             {" "}
                             {obj.appNumber[0]}
                           </p>
                           {obj.appNumber[1] && (
-                            <p className="text-blue-600">
-                              {obj.appNumber[1]}
-                            </p>
+                            <p className="text-blue-600">{obj.appNumber[1]}</p>
                           )}
                         </td>{" "}
                         <td
@@ -185,16 +214,15 @@ const Data = () => {
                         >
                           <p
                             className={`${
-                              obj.company.length > 1 && "text-red-500 line-through"
+                              obj.company.length > 1 &&
+                              "text-red-500 line-through"
                             }`}
                           >
                             {" "}
                             {obj.company[0] || "-"}
                           </p>
                           {obj.company[1] && (
-                            <p className="text-blue-600">
-                              {obj.company[1]}
-                            </p>
+                            <p className="text-blue-600">{obj.company[1]}</p>
                           )}
                         </td>{" "}
                         <td
@@ -203,7 +231,8 @@ const Data = () => {
                         >
                           <p
                             className={`${
-                              obj.membership_type.length > 1 && "text-red-500 line-through"
+                              obj.membership_type.length > 1 &&
+                              "text-red-500 line-through"
                             }`}
                           >
                             {" "}
@@ -228,9 +257,7 @@ const Data = () => {
                             {obj.date[0]}
                           </p>
                           {obj.date[1] && (
-                            <p className="text-blue-600">
-                              {obj.date[1]}
-                            </p>
+                            <p className="text-blue-600">{obj.date[1]}</p>
                           )}
                         </td>{" "}
                         <td
@@ -246,9 +273,7 @@ const Data = () => {
                             {obj.amc[0]}
                           </p>
                           {obj.amc[1] && (
-                            <p className="text-blue-600">
-                              {obj.amc[1]}
-                            </p>
+                            <p className="text-blue-600">{obj.amc[1]}</p>
                           )}
                         </td>{" "}
                         <td
@@ -257,7 +282,8 @@ const Data = () => {
                         >
                           <p
                             className={`${
-                              obj.customerName.length > 1 && "text-red-500 line-through"
+                              obj.customerName.length > 1 &&
+                              "text-red-500 line-through"
                             }`}
                           >
                             {" "}
@@ -282,9 +308,7 @@ const Data = () => {
                             {obj.GSV[0]}
                           </p>
                           {obj.GSV[1] && (
-                            <p className="text-blue-600">
-                              {obj.GSV[1]}
-                            </p>
+                            <p className="text-blue-600">{obj.GSV[1]}</p>
                           )}
                         </td>
                         <td className="px-6 py-4">
@@ -321,6 +345,50 @@ const Data = () => {
                           </p>
                           {obj.status[1] && (
                             <p className="text-blue-600">{obj.status[1]}</p>
+                          )}
+                        </td>
+                        <td className="px-6 py-4 text-center">
+                          <p
+                            className={`${
+                              (obj.GSV.length > 1 || obj.deposit.length > 1) &&
+                              "line-through"
+                            }`}
+                          >
+                            {obj.CSV[0] - obj.deposit[0]}
+                          </p>
+                          {(obj.GSV.length || obj.deposit.length) && (
+                            <p className="text-blue-600">
+                              {(obj.CSV[1] || obj.CSV[0]) -
+                                (obj.deposit[1] || obj.deposit[0])}
+                            </p>
+                          )}
+                        </td>
+                        <td className="px-6 py-4 text-center">
+                          <p
+                            className={`${
+                              obj.date.length > 1 && "line-through"
+                            }`}
+                          >
+                            {yearsCountTillNow}
+                          </p>
+                          {obj.date[1] && (
+                            <p className="text-blue-600">
+                              {yearsCountTillNow2}
+                            </p>
+                          )}
+                        </td>
+                        <td className="px-6 py-4 text-center">
+                          <p
+                            className={`${
+                              afterFeesDeduction2 && "line-through"
+                            }`}
+                          >
+                            {afterFeesDeduction}
+                          </p>
+                          {afterFeesDeduction2 && (
+                            <p className="text-blue-600">
+                              {afterFeesDeduction2}
+                            </p>
                           )}
                         </td>
                         <td className="px-6 py-4">

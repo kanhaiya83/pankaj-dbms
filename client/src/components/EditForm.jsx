@@ -20,6 +20,8 @@ function EditForm({ setShow, dataId }) {
     CSV: data.CSV || "",
     deposit: data.deposit || "",
     status: data.status || "",
+    dri_id: data.dri_id || "",
+    remarks: data.remarks || "",
   });
 
   const handleInputChange = (e) => {
@@ -58,7 +60,7 @@ function EditForm({ setShow, dataId }) {
   };
 
   return (
-    <div className="absolute bg-[#dff9fb] z-10  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  border-blue-500 rounded-md border-t-4">
+    <div className="fixed bg-[#dff9fb] z-20  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  border-blue-500 rounded-md border-t-4 w-full max-w-[1200px] h-[90vh] overflow-scroll">
       <form
         onSubmit={handleSubmit}
         className="bg-gray-50 w-full mx-auto rounded p-7  shadow-md hover:shadow-lg transition duration-400 ease-in-out"
@@ -82,10 +84,10 @@ function EditForm({ setShow, dataId }) {
             </svg>
           </button>
         </div>
-        <div className="flex justify-evenly flex-wrap gap-3">
+        <div className="grid grid-cols-3 gap-3">
           {/* Customer Name */}
           <div className="flex flex-col mb-4 flex-1">
-            <label htmlFor="customerName" className="text-lg mb-2">
+            <label htmlFor="customerName" className="text-xs mb-1">
               Customer Name:
             </label>
             <input
@@ -94,12 +96,26 @@ function EditForm({ setShow, dataId }) {
               name="customerName"
               value={form.customerName}
               onChange={handleInputChange}
-              className="border border-gray-400 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-400 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          {/* driid */}
+          <div className="flex flex-col mb-4 flex-1">
+            <label htmlFor="dri_id" className="text-xs mb-1">
+              DRI ID:
+            </label>
+            <input
+              id="dri_id"
+              type="text"
+              name="dri_id"
+              value={form.dri_id}
+              onChange={handleInputChange}
+              className="border border-gray-400 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           {/* appNumber */}
           <div className="flex flex-col mb-4 flex-1">
-            <label htmlFor="appNumber" className="text-lg mb-2">
+            <label htmlFor="appNumber" className="text-xs mb-1">
               App Number:
             </label>
             <input
@@ -108,12 +124,12 @@ function EditForm({ setShow, dataId }) {
               name="appNumber"
               value={form.appNumber}
               onChange={handleInputChange}
-              className="border border-gray-400 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-400 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           {/* company */}
           <div className="flex flex-col mb-4 flex-1">
-            <label htmlFor="company" className="text-lg mb-2">
+            <label htmlFor="company" className="text-xs mb-1">
               Company:
             </label>
             <input
@@ -122,12 +138,12 @@ function EditForm({ setShow, dataId }) {
               name="company"
               value={form.company}
               onChange={handleInputChange}
-              className="border border-gray-400 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-400 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           {/* membership_type */}
           <div className="flex flex-col mb-4 flex-1">
-            <label htmlFor="membership_type" className="text-lg mb-2">
+            <label htmlFor="membership_type" className="text-xs mb-1">
               Membership Type:
             </label>
             <input
@@ -136,12 +152,12 @@ function EditForm({ setShow, dataId }) {
               name="membership_type"
               value={form.membership_type}
               onChange={handleInputChange}
-              className="border border-gray-400 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-400 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           {/* date */}
           <div className="flex flex-col mb-4 flex-1">
-            <label htmlFor="date" className="text-lg mb-2">
+            <label htmlFor="date" className="text-xs mb-1">
               Date of Purchase:
             </label>
             <input
@@ -150,12 +166,12 @@ function EditForm({ setShow, dataId }) {
               name="date"
               value={form.date}
               onChange={handleDateChange}
-              className="border border-gray-400 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-400 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           {/* amc */}
           <div className="flex flex-col mb-4 flex-1">
-            <label htmlFor="amc" className="text-lg mb-2">
+            <label htmlFor="amc" className="text-xs mb-1">
               AMC:
             </label>
             <input
@@ -164,12 +180,12 @@ function EditForm({ setShow, dataId }) {
               name="amc"
               value={form.amc}
               onChange={handleInputChange}
-              className="border border-gray-400 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-400 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           {/* GSV */}
           <div className="flex flex-col mb-4 flex-1">
-            <label htmlFor="GSV" className="text-lg mb-2">
+            <label htmlFor="GSV" className="text-xs mb-1">
               GSV:
             </label>
             <input
@@ -178,12 +194,12 @@ function EditForm({ setShow, dataId }) {
               name="GSV"
               value={form.GSV}
               onChange={handleInputChange}
-              className="border border-gray-400 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-400 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           {/* CSV */}
           <div className="flex flex-col mb-4 flex-1">
-            <label htmlFor="CSV" className="text-lg mb-2">
+            <label htmlFor="CSV" className="text-xs mb-1">
               CSV:
             </label>
             <input
@@ -192,12 +208,12 @@ function EditForm({ setShow, dataId }) {
               name="CSV"
               value={form.CSV}
               onChange={handleInputChange}
-              className="border border-gray-400 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-400 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           {/* appNumber */}
           <div className="flex flex-col mb-4 flex-1">
-            <label htmlFor="appNumber" className="text-lg mb-2">
+            <label htmlFor="appNumber" className="text-xs mb-1">
               App Number:
             </label>
             <input
@@ -206,12 +222,12 @@ function EditForm({ setShow, dataId }) {
               name="appNumber"
               value={form.appNumber}
               onChange={handleInputChange}
-              className="border border-gray-400 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-400 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           {/* deposit */}
           <div className="flex flex-col mb-4 flex-1">
-            <label htmlFor="deposit" className="text-lg mb-2">
+            <label htmlFor="deposit" className="text-xs mb-1">
               Deposit:
             </label>
             <input
@@ -220,12 +236,12 @@ function EditForm({ setShow, dataId }) {
               name="deposit"
               value={form.deposit}
               onChange={handleInputChange}
-              className="border border-gray-400 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-400 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           {/* place */}
           <div className="flex flex-col mb-4 flex-1">
-            <label htmlFor="place" className="text-lg  mb-2">
+            <label htmlFor="place" className="text-xs mb-1">
               Place:
             </label>
             <select
@@ -233,7 +249,7 @@ function EditForm({ setShow, dataId }) {
               name="place"
               value={form.place}
               onChange={handleInputChange}
-              className="border border-gray-400 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-400 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               {["All", ...placeOptions].map((data) => {
                 return (
@@ -246,7 +262,7 @@ function EditForm({ setShow, dataId }) {
           </div>
           {/* status */}
           <div className="flex flex-col mb-4 flex-1">
-            <label htmlFor="status" className="text-lg  mb-2">
+            <label htmlFor="status" className="text-xs mb-1">
               Status:
             </label>
             <select
@@ -254,7 +270,7 @@ function EditForm({ setShow, dataId }) {
               name="status"
               value={form.status}
               onChange={handleInputChange}
-              className="border border-gray-400 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-400 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               {["All", ...statusOptions].map((data) => {
                 return (
@@ -264,6 +280,21 @@ function EditForm({ setShow, dataId }) {
                 );
               })}
             </select>
+          </div>
+          
+          {/* remarks */}
+          <div className="flex flex-col mb-4 flex-1">
+            <label htmlFor="remarks" className="text-xs mb-1">
+              Remarks:
+            </label>
+            <textarea
+              id="remarks"
+              type="text"
+              name="remarks"
+              value={form.remarks}
+              onChange={handleInputChange}
+              className="border border-gray-400 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </div>
         </div>
 

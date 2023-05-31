@@ -139,12 +139,12 @@ const AppProvider = ({ children }) => {
     
     
      const getAllData=async(queryObject)=>{
-      let {status="",place="",year="",customerName="",editStatus="",dri_id="",appNumber=""}=queryObject;
+      let {status="",place="",year="",customerName="",editStatus="",dri_id="",appNumber="",amc=""}=queryObject;
       customerName=customerName.toUpperCase()
       dispatch({type:API_CALL_BEGIN});     
       try {
   
-        const {data}= await instance(`/getDataList?dri_id=${dri_id}&appNumber=${appNumber}&year=${year}&status=${status}&place=${place}&customerName=${customerName}&editStatus=${editStatus}&page=${page}`) 
+        const {data}= await instance(`/getDataList?dri_id=${dri_id}&appNumber=${appNumber}&year=${year}&status=${status}&place=${place}&customerName=${customerName}&editStatus=${editStatus}&page=${page}&amc=${amc}`) 
         console.log(data);
         
         dispatch({type:GET_ALL_DATA_SUCCESS,
