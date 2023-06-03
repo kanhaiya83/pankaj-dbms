@@ -37,7 +37,7 @@ const [exporting,setExporting] = useState(false)
         <div className="flex items-center justify-between">
         <h1 className="text-2xl mb-5">Search form </h1>
         <div>
-          {user?.name =="Admin" &&  <button className="bg-[#3b82f6] rounded py-2 px-5 text-white" onClick={handleExport} type="button">Export</button>
+          {user?.name =="admin" &&  <button className="bg-[#3b82f6] rounded py-2 px-5 text-white" onClick={handleExport} type="button">Export</button>
 }
         </div>
         </div>
