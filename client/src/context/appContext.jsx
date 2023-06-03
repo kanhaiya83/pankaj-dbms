@@ -159,7 +159,6 @@ const AppProvider = ({ children }) => {
     const exportData=async(queryObject)=>{
      let {status="",place="",year="",customerName="",editStatus="",dri_id="",appNumber="",amc=""}=queryObject;
      customerName=customerName.toUpperCase()
-     dispatch({type:API_CALL_BEGIN});     
      try {
  
        const {data}= await instance(`/export?dri_id=${dri_id}&appNumber=${appNumber}&year=${year}&status=${status}&place=${place}&customerName=${customerName}&editStatus=${editStatus}&page=${page}&amc=${amc}`) 
