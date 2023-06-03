@@ -5,7 +5,7 @@ const statusOptions = ["Regular", "Outstanding", "I.R.M"];
 const placeOptions = ["GOA"];
 
 const SearchContainer = ({ form, setForm }) => {
-  const { getAllData, setPage, page } = useAppContext();
+  const { getAllData, setPage, page,exportData } = useAppContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,6 +13,9 @@ const SearchContainer = ({ form, setForm }) => {
     if (page === 1) return getAllData({ ...form });
     setPage(1);
   };
+  const handleExport = ()=>{
+    exportData(form)
+  }
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setForm((prevState) => ({
@@ -27,7 +30,10 @@ const SearchContainer = ({ form, setForm }) => {
         onSubmit={handleSubmit}
         className="bg-gray-50 w-full mx-auto rounded py-2 px-[5%]  shadow-md hover:shadow-lg transition duration-400 ease-in-out"
       >
+        <div className="flex items-center justify-between">
         <h1 className="text-2xl mb-5">Search form </h1>
+        <button className="bg-[#3b82f6] rounded py-2 px-5 text-white" onClick={handleExport} type="button">Export</button>
+        </div>
         <div className="flex justify-evenly flex-wrap gap-3">
           {/* DRI_ID */}
           <div className="flex flex-col mb-4 flex-1">

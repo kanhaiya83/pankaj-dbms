@@ -15,6 +15,10 @@ const mainDataSchema = new mongoose.Schema({
   status: { type: String, default: "" },
   currentValue: { type: String },
   remarks: { type: String, default: "" },
+  address: { type: String, default: "" },
+  profession: { type: String, default: "" },
+  residentialPhone: { type: String, default: "" },
+  officePhone: { type: String, default: "" },
 });
 
 export default mongoose.model("MainData", mainDataSchema);

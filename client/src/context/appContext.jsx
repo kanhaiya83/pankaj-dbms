@@ -138,7 +138,7 @@ const AppProvider = ({ children }) => {
     
     
     
-     const getAllData=async(queryObject)=>{
+    const getAllData=async(queryObject)=>{
       let {status="",place="",year="",customerName="",editStatus="",dri_id="",appNumber="",amc=""}=queryObject;
       customerName=customerName.toUpperCase()
       dispatch({type:API_CALL_BEGIN});     
@@ -155,7 +155,26 @@ const AppProvider = ({ children }) => {
         console.log(error)
       }
       
-    }
+    } 
+    const exportData=async(queryObject)=>{
+     let {status="",place="",year="",customerName="",editStatus="",dri_id="",appNumber="",amc=""}=queryObject;
+     customerName=customerName.toUpperCase()
+     dispatch({type:API_CALL_BEGIN});     
+     try {
+ 
+       const {data}= await instance(`/export?dri_id=${dri_id}&appNumber=${appNumber}&year=${year}&status=${status}&place=${place}&customerName=${customerName}&editStatus=${editStatus}&page=${page}&amc=${amc}`) 
+       
+       console.log(data);
+      window.open(import.meta.env.VITE_SERVER_URL+"/download/"+data.fileName)
+      //  dispatch({type:EXPORT_DATA_SUCCESS,
+      //    payload:data
+      //  })
+     } catch (error) {
+       dispatch({type:API_CALL_FAIL});
+       console.log(error)
+     }
+     
+   }
 
     const UploadData=async(file)=>{
      
@@ -264,7 +283,7 @@ const AppProvider = ({ children }) => {
           value={{...state,
             setFile,UploadData,getAllData,editData,getAllEditRequest,approveEditRequest,rejectEditRequest
             ,signupUser,loginUser,logoutUser,getCurrUser,page
-            ,setPage}}
+            ,setPage,exportData}}
         >
           {children}
         </AppContext.Provider>

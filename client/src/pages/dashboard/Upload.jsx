@@ -21,7 +21,7 @@ const Upload = () => {
       <div className='bg-gray-50 p-10 px-[6rem] rounded-md border-4 border-dotted mt-[10rem] mb-[2rem]  border-gray-500 cursor-pointer shadow-lg hover:shadow-xl transition duration-400 ease-in-out'>
       {
         isDragActive ?
-          <p className='w-full'>Drop the .xlsx  file here ...</p> :
+          <p className='w-full'>Drop the .xlsx ot .txt file here ...</p> :
           <p className='w-full'>Drag 'n' drop file here,<br/> or click to select files</p>
       }
       </div>

@@ -1,4 +1,5 @@
 import express from "express";
+// import "./delete.js"
 import connectDB from "./utils/connectDb.js";
 import dotenv from "dotenv";
 import errorMiddleware from "./middleware/error.js";
@@ -43,7 +44,7 @@ app.use("/api/v1/auth", userRouter);
 app.use("/api/v1", mainDataRouter);
 app.use("/api/v1/edit", UpdateDataRouter);
 
-// app.use(express.static(path.resolve(__dirname, "../server/dist")));
+app.use("/download",express.static("uploads"));
 
 // app.get("*", (req, res) => {
 //   res.status(404).send("<h1> Not Found</h2>");
